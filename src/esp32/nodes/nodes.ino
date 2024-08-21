@@ -8,16 +8,17 @@
 #define   MESH_PASSWORD   "linuxisnotunix"
 #define   MESH_PORT       9090
 
+
 // to Identify The node
 int nodeNumber = 1;
+const int echoPin = 5 ;
+const int trigerPin = 18 ;
 
 String readings;
 
 String getReadings();
-void sendMessage() ; 
-float getUltrasonicReadings();
-const int trigPin = 5;
-const int echoPin = 18;
+void sendMessage(); 
+
  
 Scheduler userScheduler; // to control your personal task
 painlessMesh  mesh;
@@ -59,9 +60,10 @@ String getReadings(){
     
   StaticJsonDocument<200> doc; // Adjust size as needed
   doc["node"] = nodeNumber;
-  doc["distance"] = getUltrasonicReadings();
+  doc["distance"] = getUltrasonicReadings(echoPin,trigerPin);
   
   String readings;
+  Serial.println(readings);
   serializeJson(doc, readings);
   return readings;
 }
@@ -69,7 +71,7 @@ String getReadings(){
 void setup() {
   Serial.begin(9600);
 
-  pinMode(trigPin, OUTPUT); 
+  pinMode(trigerPin, OUTPUT); 
   pinMode(echoPin, INPUT); 
 
 //mesh.setDebugMsgTypes( ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE ); // all types on

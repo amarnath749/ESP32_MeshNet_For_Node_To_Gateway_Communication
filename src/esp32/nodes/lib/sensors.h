@@ -5,7 +5,7 @@
 #define SOUND_SPEED 0.034
 #define CM_TO_INCH 0.393701
 
-float getUltrasonicReadings(short trigPin, short echoPin, ) {
+float getUltrasonicReadings(short trigPin, short echoPin) {
   int duration;
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
