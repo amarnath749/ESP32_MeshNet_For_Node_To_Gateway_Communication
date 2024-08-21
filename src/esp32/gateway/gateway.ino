@@ -17,8 +17,9 @@ WiFiServer server(80);
 LiquidCrystal_I2C lcd(0x27,16,2);
 
 String header;
-
+// Initialized it as global variable so that it will be accessible from any part of the system
 float distance ; 
+
 
 unsigned long currentTime = millis();
 unsigned long previousTime = 0; 
@@ -111,6 +112,7 @@ void setup() {
 }
 
 void loop() {
+
   WiFiClient client = server.available();
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
@@ -184,12 +186,11 @@ if (client) {
   // lcd.setCursor(0,1);
   // lcd.scrollDisplayLeft();  
   // delay(700);  
-  delay(40);
   int numberAvailable = (int)  WiFi.scanNetworks() ;
-
+  delay(140);
+   lcd.clear();
   Serial.println("Available Networks " + numberAvailable);
   for(int i=0; i< numberAvailable ; ++i){
-    lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("id ");
     lcd.print(WiFi.SSID(i));
@@ -197,8 +198,7 @@ if (client) {
     lcd.print("Str ");
     lcd.print(WiFi.RSSI(i));
     lcd.print(" dBm");
-    delay(2000);
-
+    delay(1000);
   }
   mesh.update();
 }
