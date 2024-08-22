@@ -31,7 +31,6 @@ Scheduler userScheduler;
 painlessMesh  mesh;
 
 // INFO: Functions for painlessMesh other functions should go above
-
 void sendMessage() ; 
 // Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
@@ -98,7 +97,7 @@ void setup() {
     Serial.println(WiFi.localIP());
 
   Serial.println("This ID " + String(mesh.getNodeId()));
-//mesh.setDebugMsgTypes( ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE ); // all types on
+  //mesh.setDebugMsgTypes( ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE ); // all types on
   mesh.setDebugMsgTypes(   ERROR | STARTUP);  // set before init() so that you can see startup messages
   mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT,WIFI_AP ); // 6 -> wifi channel
   mesh.onReceive(&receivedCallback);
@@ -200,5 +199,5 @@ if (client) {
     lcd.print(" dBm");
     delay(1000);
   }
-  mesh.update();
+  7
 }
